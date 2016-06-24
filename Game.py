@@ -20,45 +20,48 @@ class Game(object):
 			self.startGame()
 			print "Congrats! The " + self.winner + "'s win the game!\n"
 			print "Play Again?\n "
-			//get input
-			if(input)
+			response = input("Play Again? [Y/N]: ")
+			if(response == "N" or response == "n"):
 				keepPlaying = false
-			else
+			else:
 				self.player1 = "X" if self.player1 == "O" else "O"
 				self.player2 = "X" if self.player2 == "O" else "O"
+		return
 
 
 	def startGame(self):
-		// print rules
+		print "Welcome to Text based Tic-Tac-Toe!\n"
 		print "Match 3 in Row to win!\n"
 		
 		newGame()
 		turn = "X"
-		print "Player "
-		print 1 if (self.player1 == "X") else 2
-		print " Starts.\n"
+		print "Player ", 1 if (self.player1 == "X") else 2, " Starts.\n"
 
 		while(self.winner == None):
 			success = false
 			self.displayBoard()
 
-			while(!success):
-				//get input
-				success = self.isLegalMove(x, y);
+			while(not success):
+				print "Enter move coordinates: \n"
+				x = int(input("Enter row: "))
+				y = int(input("Enter column: "))
+				success = self.isLegalMove(x, y)
 
 				if(success):
 					self.move(turn, x, y)
 					turn = self.player2 if turn == self.player1 else player1
 				else:
-					print "Invalid move, please try again: "
+					print "Invalid move, please try again: \n"
+		return
 
 
-    def move(self, marker, x, y):
-    	self.lastMove = [x, y]
-    	self.board[x][y] = marker
+	def move (self, marker, x, y):
+		self.lastMove = [x, y]
+		self.board[x][y] = marker
 
-    	if( self.isWinner()):
-    		self.winner = marker
+		if( self.isWinner()):
+			self.winner = marker
+		return
 
 
 	def isWinner(self):
@@ -66,15 +69,15 @@ class Game(object):
 		x = self.lastMove[0]
 		y = self.lastMove[1]
 
-		// check row
+		# check row
 		if(self.board[x][0] == self.board[x][1] == self.board[x][2]):
 			return true
 
-		// check column
+		# check column
 		if(self.board[0][y] == self.board[1][y] == self.board[2][y]):
 			return true
 
-		// check diagonals
+		# check diagonals
 		if(x == y):
 			if(self.board[0][0] == self.board[1][1] == self.board[2][2]):
 				return true
@@ -95,7 +98,7 @@ class Game(object):
 			for j in range(3):
 				if(self.board[i][j] == None):
 					print "-"
-				else 
+				else:
 					print self.board[i][j]
 
 				if(j < 2):

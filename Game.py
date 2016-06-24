@@ -28,7 +28,7 @@ class Game(object):
 			print("'s win the game!\n")
 			self.displayBoard()
 
-			response = "" + input("Play Again? [Y/N]: ")
+			response = raw_input("Play Again? [Y/N]: ")
 			if(response == 'N' or response == 'n'):
 				keepPlaying = False
 			else:

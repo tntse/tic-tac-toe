@@ -23,9 +23,14 @@ class Game(object):
 
 		while(keepPlaying):
 			self.startGame()
-			print ("Congrats! The ", end="")
-			print(self.winner, end="")
-			print("'s win the game!\n")
+
+			if(self.winner == None):
+				print("\nIt's a tie!")
+			else:
+				print ("Congrats! The ", end="")
+				print(self.winner, end="")
+				print("'s win the game!")
+
 			self.displayBoard()
 
 			response = raw_input("Play Again? [Y/N]: ")
@@ -45,16 +50,16 @@ class Game(object):
 		turn = "X"
 		print ("Player ", end="")
 		print (1 if (self.player1 == "X") else 2, end="")
-		print (" Starts. ")
+		print (" Starts. \n")
 
-		while(self.winner == None):
+		while(self.winner == None and not self.isBoardFull()):
 			success = False
-			self.displayBoard()
 
 			while(not success):
 				print("Player ", end="")
 				print(1 if (self.player1 == turn) else 2, end="")
 				print(" Turn.")
+				self.displayBoard()
 				print ("Enter move coordinates: ")
 				x = int(input("Enter row: "))
 				y = int(input("Enter column: "))
@@ -63,8 +68,9 @@ class Game(object):
 				if(success):
 					self.move(turn, x, y)
 					turn = self.player2 if turn == self.player1 else self.player1
+					print("")
 				else:
-					print ("Invalid move, please try again: ")
+					print ("\nInvalid move, please try again: ")
 		return
 
 
@@ -76,6 +82,9 @@ class Game(object):
 			self.winner = marker
 		return
 
+
+	def isBoardFull(self):
+		return not (None in self.board[0]) and not (None in self.board[1]) and not (None in self.board[2])
 
 	def isWinner(self, marker):
 

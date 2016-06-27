@@ -116,19 +116,22 @@ class Game(object):
 		return False
 
 	def displayBoard(self):
-		for i in range(3):
-			for j in range(3):
+		print ("\033[4m", end="")
+		for i in range(len(self.board)):
+			for j in range(len(self.board[i])):
 				if(self.board[i][j] == None):
-					print ("-", end="")
+					print (" - ", end="")
 				else:
-					print (self.board[i][j], end="")
+					print (' ' + self.board[i][j], end=" ")
 
-				if(j < 2):
-					print (" | ", end="")
-			print ("")
+				if(j < len(self.board[i])-1):
+					print ("|", end="")
 
+			if(i==len(self.board)-2):
+				print ("\033[0m")
+			else:
+				print ("")
 
 if __name__ == "__main__":
 	game = Game()
 	game.play()
-
